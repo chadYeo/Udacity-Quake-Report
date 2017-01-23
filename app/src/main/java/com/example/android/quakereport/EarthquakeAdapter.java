@@ -46,8 +46,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         viewHolder.locationTextView.setText(currentPosition.getLocation());
 
         viewHolder.dateTextVies = (TextView) convertView.findViewById(R.id.date_textView);
-        viewHolder.locationTextView.setText(currentPosition.getDate());
+        viewHolder.dateTextVies.setText(currentPosition.getDate());
 
-        return super.getView(position, convertView, parent);
+        return convertView;
     }
 }
