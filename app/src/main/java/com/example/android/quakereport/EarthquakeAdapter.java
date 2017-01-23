@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import java.text.NumberFormat;
 import java.util.List;
-import java.util.zip.Inflater;
 
 /**
  * Created by ChadYeo on 1/22/17.
