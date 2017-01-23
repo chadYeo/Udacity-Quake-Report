@@ -14,15 +14,15 @@ public class Earthquake {
         mDate = date;
     }
 
-    public Double getmMag() {
+    public Double getMag() {
         return mMag;
     }
 
-    public String getmLocation() {
+    public String getLocation() {
         return mLocation;
     }
 
-    public String getmDate() {
+    public String getDate() {
         return mDate;
     }
 }
