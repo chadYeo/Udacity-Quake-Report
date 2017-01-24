@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,8 +23,10 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     static class ViewHolder {
         TextView magTextView;
+        TextView nearbyTextView;
         TextView locationTextView;
-        TextView dateTextVies;
+        TextView dateTextView;
+        TextView hourTextView;
     }
 
     @Override
@@ -41,12 +45,44 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         NumberFormat nf = NumberFormat.getNumberInstance();
         viewHolder.magTextView.setText(nf.format(result));
 
-        viewHolder.locationTextView = (TextView) convertView.findViewById(R.id.location_textView);
-        viewHolder.locationTextView.setText(currentPosition.getLocation());
+        String originalLocation = currentPosition.getLocation();
+        String nearbyText;
+        String locationText;
 
-        viewHolder.dateTextVies = (TextView) convertView.findViewById(R.id.date_textView);
-        viewHolder.dateTextVies.setText(currentPosition.getDate());
+        if (originalLocation.contains(" of ")) {
+            String[] parts = originalLocation.split(" of ");
+            nearbyText = parts[0] + " of ";
+            locationText = parts[1];
+        } else {
+            nearbyText = "Near by ";
+            locationText = originalLocation;
+        }
+
+        viewHolder.nearbyTextView = (TextView) convertView.findViewById(R.id.nearby_textView);
+        viewHolder.nearbyTextView.setText(nearbyText);
+
+        viewHolder.locationTextView = (TextView) convertView.findViewById(R.id.location_textView);
+        viewHolder.locationTextView.setText(locationText);
+
+        viewHolder.dateTextView = (TextView) convertView.findViewById(R.id.date_textView);
+        Date dateView = new Date(currentPosition.getTimeInMilliseconds());
+        String formattedDate = formatDate(dateView);
+        viewHolder.dateTextView.setText(formattedDate);
+
+        viewHolder.hourTextView = (TextView) convertView.findViewById(R.id.hour_textView);
+        String formattedTime = formatTime(dateView);
+        viewHolder.hourTextView.setText(formattedTime);
 
         return convertView;
+    }
+
+    private String formatDate(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyy");
+        return dateFormat.format(dateObject);
+    }
+
+    private String formatTime(Date dateObject) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a");
+        return dateFormat.format(dateObject);
     }
 }
