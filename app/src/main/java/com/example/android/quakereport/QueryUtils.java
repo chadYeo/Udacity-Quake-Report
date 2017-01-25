@@ -6,12 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
 
 /**
  * Created by ChadYeo on 1/23/17.
@@ -64,8 +59,9 @@ public class QueryUtils {
                 double mag = properties.getDouble("mag");
                 String place = properties.getString("place");
                 long timeInMilliseconds = properties.getLong("time");
+                String url = properties.getString("url");
 
-                earthquakes.add(new Earthquake(mag, place, timeInMilliseconds));
+                earthquakes.add(new Earthquake(mag, place, timeInMilliseconds, url));
             }
 
         } catch (JSONException e) {
