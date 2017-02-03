@@ -132,6 +132,8 @@ public class QueryUtils {
 
         List<Earthquake> earthquakes = extractFeatureFromJson(jsonResponse);
 
+        Log.i(LOG_TAG, "fetchEarthquakeData is initiated");
+
         return earthquakes;
     }
 }

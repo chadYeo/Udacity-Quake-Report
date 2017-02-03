@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     public EarthquakeAdapter(Context context, List<Earthquake> objects) {
         super(context, 0, objects);
     }
+
+    private List<Earthquake> earthquakes = new ArrayList<Earthquake>();
 
     static class ViewHolder {
         TextView magTextView;
@@ -134,5 +137,10 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         }
 
         return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
+    }
+
+    public void setEarthquakes(List<Earthquake> data) {
+        earthquakes.addAll(data);
+        notifyDataSetChanged();
     }
 }
